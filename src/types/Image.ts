@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 
-// Graphql Spell type
+// Graphql Image type
 @ObjectType()
 export class Image {
   @Field()
