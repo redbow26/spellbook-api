@@ -1,4 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
+import { Image } from "./Image";
 
 // Graphql Spell type
 @ObjectType()
@@ -13,7 +14,5 @@ export class TypeSpell {
   cooldown: number;
 
   @Field()
-  image: {
-    url: string;
-  };
+  image: Image;
 }
