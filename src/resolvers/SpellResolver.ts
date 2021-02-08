@@ -1,6 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { TypeSpell } from "../types/TypeSpell";
 import Spell from "../database/schema/Spell";
+import { Language } from "../types/Language";
 
 @Resolver()
 export class SpellResolver {
@@ -14,12 +15,13 @@ export class SpellResolver {
 
   // Get a specified spell by his id or his name
   @Query(() => TypeSpell, { nullable: true })
-  async spell(@Arg("id") id?: string, @Arg("name") name?: string) {
+  async spell(@Arg("id") id?: string, @Arg("name") name?: Language) {
     let spell;
     // Find the spell by his id
     if (id) spell = Spell.findById(id);
     // Find the spell by his name
-    else if (name) spell = Spell.find({ name });
+    else if (name?.fr) spell = Spell.find({ "name.fr": name.fr });
+    else if (name?.en) spell = Spell.find({ "name.fr": name.en });
     // No id or name pass, return null
     else return null;
     // Return the spell
@@ -29,19 +31,29 @@ export class SpellResolver {
   // Create a new spell if it doesn't exist and return it
   @Mutation(() => TypeSpell)
   async createSpell(
-    @Arg("name") name: string,
-    @Arg("mana") mana: number,
+    @Arg("name") name?: Language,
+    @Arg("description") description?: Language,
+    @Arg("mana") mana?: number,
     @Arg("cooldown") cooldown?: number,
     @Arg("imageUrl") imageUrl?: string
   ) {
     // Check if the spell exist and return it
-    let find = await Spell.find({ name });
+    let find = await Spell.find({ "name.fr": name?.fr });
+    if (find) return find;
+    find = await Spell.find({ "name.en": name?.en });
     if (find) return find;
     let spell;
     try {
       // Create new spell
       spell = new Spell({
-        name,
+        name: {
+          fr: name?.fr,
+          en: name?.en,
+        },
+        description: {
+          fr: description?.fr,
+          en: description?.en,
+        },
         mana,
         cooldown,
         image: {

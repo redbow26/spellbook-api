@@ -1,7 +1,14 @@
 import { createSchema, Type, typedModel } from "ts-mongoose";
 
 const SpellSchema = createSchema({
-  name: Type.string({ required: true }),
+  name: {
+    fr: Type.string({ required: true }),
+    en: Type.string({ required: true }),
+  },
+  description: {
+    fr: Type.string({ required: false }),
+    en: Type.string({ required: false }),
+  },
   mana: Type.number({ required: true }),
   cooldown: Type.number({ required: true, default: 0 }),
   image: {
