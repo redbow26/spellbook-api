@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 import data from "../database/Zenko.json";
+import * as fs from "fs";
 
 // Graphql Zenko type
 @ObjectType()
@@ -64,6 +65,11 @@ export class TypeZenko {
     data.maxHealth = this.maxHealth;
     data.mana = this.mana;
     data.maxMana = this.maxMana;
+    fs.writeFileSync(
+      "src/database/Zenko.json",
+      JSON.stringify(data, null, 2),
+      "utf-8"
+    );
   }
 
   takeDamage(damage: number) {

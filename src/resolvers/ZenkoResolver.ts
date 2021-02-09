@@ -8,26 +8,34 @@ export class ZenkoResolver {
   @Query(() => TypeZenko, {
     description: "Get all the stats of zenko",
   })
-  async stats(@Ctx() context: Context) {
-    return context.zenko;
+  async stats(@Ctx() { zenko }: Context) {
+    return zenko;
   }
 
   // Damage zenko's health
   @Mutation(() => TypeZenko, {
     description: "Damage zenko's health",
   })
-  async takeDamage(@Ctx() context: Context, @Arg("damage") damage: number) {
-    context.zenko.takeDamage(damage);
-    return context.zenko;
+  async takeDamage(
+    @Ctx()
+    { zenko }: Context,
+    @Arg("damage") damage: number
+  ) {
+    zenko.takeDamage(damage);
+    return zenko;
   }
 
   // Regen zenko's health
   @Mutation(() => TypeZenko, {
     description: "Regen zenko's health",
   })
-  async regenHealth(@Ctx() context: Context, @Arg("health") health: number) {
-    context.zenko.regenHealth(health);
-    return context.zenko;
+  async regenHealth(
+    @Ctx()
+    { zenko }: Context,
+    @Arg("health") health: number
+  ) {
+    zenko.regenHealth(health);
+    return zenko;
   }
 
   // Set zenko's max health
@@ -35,37 +43,50 @@ export class ZenkoResolver {
     description: "Set zenko's max health",
   })
   async setMaxHealth(
-    @Ctx() context: Context,
+    @Ctx()
+    { zenko }: Context,
     @Arg("maxHealth") maxHealth: number
   ) {
-    context.zenko.maxHealth(maxHealth);
-    return context.zenko;
+    zenko.maxHealth(maxHealth);
+    return zenko;
   }
 
   // Use zenko's mana
   @Mutation(() => TypeZenko, {
     description: "Use zenko's mana",
   })
-  async useMana(@Ctx() context: Context, @Arg("mana") mana: number) {
-    context.zenko.useMana(mana);
-    return context.zenko;
+  async useMana(
+    @Ctx()
+    { zenko }: Context,
+    @Arg("mana") mana: number
+  ) {
+    zenko.useMana(mana);
+    return zenko;
   }
 
   // Regen zenko's mana
   @Mutation(() => TypeZenko, {
     description: "Regen zenko's mana",
   })
-  async regenMana(@Ctx() context: Context, @Arg("mana") mana: number) {
-    context.zenko.regenMana(mana);
-    return context.zenko;
+  async regenMana(
+    @Ctx()
+    { zenko }: Context,
+    @Arg("mana") mana: number
+  ) {
+    zenko.regenMana(mana);
+    return zenko;
   }
 
   // Set zenko's max mana
   @Mutation(() => TypeZenko, {
     description: "Set zenko's max mana",
   })
-  async setMaxMana(@Ctx() context: Context, @Arg("maxMana") maxMana: number) {
-    context.zenko.maxMana(maxMana);
-    return context.zenko;
+  async setMaxMana(
+    @Ctx()
+    { zenko }: Context,
+    @Arg("maxMana") maxMana: number
+  ) {
+    zenko.maxMana(maxMana);
+    return zenko;
   }
 }

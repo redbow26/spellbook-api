@@ -55,14 +55,32 @@ let server: Server;
   });
 })();
 
+// catching signals and do something before exit
+[
+  "SIGHUP",
+  "SIGINT",
+  "SIGQUIT",
+  "SIGILL",
+  "SIGTRAP",
+  "SIGABRT",
+  "SIGBUS",
+  "SIGFPE",
+  "SIGUSR1",
+  "SIGSEGV",
+  "SIGUSR2",
+  "SIGTERM",
+].forEach(function (sig) {
+  process.on(sig, function () {
+    process.exit(0);
+  });
+});
+
 // Before the app is exit (on a crash or manually shutdown)
-process.on("beforeExit", async (code) => {
+process.on("exit", () => {
   // Save current zenko data
   zenko.save();
-  // Close the database
-  await mongoose.disconnect();
+  // Close the mongoose connection
+  mongoose.connection.close();
   // Close the server connection
   server.close();
-  // Exit the process
-  process.exit(code);
 });
