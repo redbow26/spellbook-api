@@ -31,7 +31,7 @@ let server: Server;
   const PORT = process.env.PORT || 3001;
 
   // Create a mongodb connection
-  await mongoose.connect(`mongodb://localhost/${process.env.MONGO_DB}`, {
+  await mongoose.connect(`${process.env.MONGO_DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

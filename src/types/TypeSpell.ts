@@ -1,15 +1,15 @@
 import { Field, ObjectType } from "type-graphql";
-import { Image } from "./Image";
-import { Language } from "./Language";
+import { TypeImage } from "./TypeImage";
+import { TypeLanguage } from "./TypeLanguage";
 
 // Graphql Spell type
 @ObjectType()
 export class TypeSpell {
   @Field()
-  name: Language;
+  name: TypeLanguage;
 
   @Field()
-  description: Language;
+  description: TypeLanguage;
 
   @Field()
   mana: number;
@@ -18,5 +18,5 @@ export class TypeSpell {
   cooldown: number;
 
   @Field()
-  image: Image;
+  image: TypeImage;
 }
