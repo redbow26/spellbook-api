@@ -5,18 +5,21 @@ import { TypeLanguage } from "./TypeLanguage";
 // Graphql Spell type
 @ObjectType()
 export class TypeSpell {
-  @Field()
+  @Field({ description: "" })
+  id: string;
+
+  @Field({ description: "" })
   name: TypeLanguage;
 
-  @Field()
-  description: TypeLanguage;
+  @Field({ nullable: true, description: "" })
+  description?: TypeLanguage;
 
-  @Field()
+  @Field({ description: "" })
   mana: number;
 
-  @Field()
+  @Field({ description: "" })
   cooldown: number;
 
-  @Field()
-  image: TypeImage;
+  @Field({ nullable: true, description: "" })
+  image?: TypeImage;
 }

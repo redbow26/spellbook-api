@@ -4,9 +4,9 @@ import { Field, InputType } from "type-graphql";
 // Use for every type that need different language string
 @InputType()
 export class LanguageInput {
-  @Field()
+  @Field({ nullable: true, description: "" })
   fr?: string;
 
-  @Field()
+  @Field({ nullable: true, description: "" })
   en?: string;
 }

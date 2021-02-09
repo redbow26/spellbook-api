@@ -34,27 +34,37 @@ export class SpellResolver {
   async createSpell(@Arg("input") input: SpellInput) {
     const { name, description, mana, cooldown, image } = input;
 
-    // Check if the spell exist and return it
-    let find = await Spell.find({ "name.fr": name?.fr });
-    if (find) return find;
-    find = await Spell.find({ "name.en": name?.en });
-    if (find) return find;
     let spell;
-    try {
-      // Create new spell
-      spell = new Spell({
-        name,
-        description,
-        mana,
-        cooldown,
-        image,
-      });
-      // Save it in the database
-      await spell.save();
-    } catch (err) {
-      // If error return null
-      console.log(err);
-      return null;
+
+    // Get the spell if it exist
+    if (name?.fr) spell = await Spell.findOne({ "name.fr": name.fr });
+    if (spell) return spell;
+    if (name?.en) spell = await Spell.findOne({ "name.fr": name.en });
+    if (spell) return spell;
+
+    if (!spell) {
+      try {
+        // Create new spell
+        spell = new Spell({
+          name: {
+            fr: name?.fr,
+            en: name?.en,
+          },
+          description: {
+            fr: description?.fr,
+            en: description?.en,
+          },
+          mana,
+          cooldown,
+          image: image ? image : null,
+        });
+        // Save it in the database
+        await spell.save();
+      } catch (err) {
+        // If error return null
+        console.log(err);
+        return null;
+      }
     }
     // Return the new spell
     return spell;

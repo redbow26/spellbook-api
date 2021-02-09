@@ -4,9 +4,9 @@ import { Field, ObjectType } from "type-graphql";
 // Use for every type that need different language string
 @ObjectType()
 export class TypeLanguage {
-  @Field()
+  @Field({ nullable: true, description: "" })
   fr?: string;
 
-  @Field()
+  @Field({ nullable: true, description: "" })
   en?: string;
 }

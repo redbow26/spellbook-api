@@ -5,18 +5,18 @@ import { ImageInput } from "./ImageInput";
 // Graphql Spell input
 @InputType()
 export class SpellInput {
-  @Field()
+  @Field({ nullable: true, description: "" })
   name?: LanguageInput;
 
-  @Field()
+  @Field({ nullable: true, description: "" })
   description?: LanguageInput;
 
-  @Field()
+  @Field({ description: "" })
   mana: number;
 
-  @Field()
+  @Field({ nullable: true, description: "" })
   cooldown?: number;
 
-  @Field()
+  @Field({ nullable: true, description: "" })
   image?: ImageInput;
 }

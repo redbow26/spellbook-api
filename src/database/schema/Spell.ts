@@ -2,8 +2,8 @@ import { createSchema, Type, typedModel } from "ts-mongoose";
 
 const SpellSchema = createSchema({
   name: {
-    fr: Type.string({ required: true }),
-    en: Type.string({ required: true }),
+    fr: Type.string({ required: false }),
+    en: Type.string({ required: false }),
   },
   description: {
     fr: Type.string({ required: false }),
