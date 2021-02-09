@@ -70,7 +70,15 @@ export class TypeZenko {
     this.health -= damage;
   }
 
+  regenHealth(health: number) {
+    this.health += health;
+  }
+
   useMana(mana: number) {
     this.mana -= mana;
+  }
+
+  regenMana(mana: number) {
+    this.mana += mana;
   }
 }

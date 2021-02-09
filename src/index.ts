@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import { SpellResolver } from "./resolvers/SpellResolver";
 import { TypeZenko } from "./types/TypeZenko";
 import { Server } from "http";
+import { ZenkoResolver } from "./resolvers/ZenkoResolver";
 
 // Data for health and mana for zenko
 const zenko = new TypeZenko();
@@ -39,7 +40,7 @@ let server: Server;
   // Create a apollo server
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [SpellResolver],
+      resolvers: [SpellResolver, ZenkoResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({ req, res, zenko }),
