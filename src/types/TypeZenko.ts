@@ -19,7 +19,7 @@ export class TypeZenko {
     this._maxMana = data.maxMana;
   }
 
-  @Field() get health(): number {
+  @Field({ description: "Health of zenko" }) get health(): number {
     return this._health;
   }
 
@@ -29,7 +29,7 @@ export class TypeZenko {
     else this._health = value;
   }
 
-  @Field() get maxHealth(): number {
+  @Field({ description: "Max health of zenko" }) get maxHealth(): number {
     return this._maxHealth;
   }
 
@@ -39,7 +39,7 @@ export class TypeZenko {
     this._maxHealth = value;
   }
 
-  @Field() get mana(): number {
+  @Field({ description: "Mana of zenko" }) get mana(): number {
     return this._mana;
   }
 
@@ -49,7 +49,7 @@ export class TypeZenko {
     else this._mana = value;
   }
 
-  @Field() get maxMana(): number {
+  @Field({ description: "Max mana of zenko" }) get maxMana(): number {
     return this._maxMana;
   }
 
