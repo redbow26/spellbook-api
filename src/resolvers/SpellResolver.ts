@@ -21,13 +21,16 @@ export class SpellResolver {
     nullable: true,
     description: "Get a spell with his id or his name",
   })
-  async spell(@Arg("id") id?: string, @Arg("name") name?: LanguageInput) {
+  async spell(
+    @Arg("id", { nullable: true }) id?: string,
+    @Arg("name", { nullable: true }) name?: LanguageInput
+  ) {
     let spell;
     // Find the spell by his id
-    if (id) spell = Spell.findById(id);
+    if (id) spell = await Spell.findById(id);
     // Find the spell by his name
-    else if (name?.fr) spell = Spell.find({ "name.fr": name.fr });
-    else if (name?.en) spell = Spell.find({ "name.fr": name.en });
+    else if (name?.fr) spell = await Spell.findOne({ "name.fr": name.fr });
+    else if (name?.en) spell = await Spell.findOne({ "name.fr": name.en });
     // No id or name pass, return null
     else return null;
     // Return the spell
